@@ -126,11 +126,15 @@
                 // vérification que les notes saisies soient entre 0 et 20    
             } else if (noteMin < 0 || noteMax > 20) {
                 alert("veuillez saisir des notes entre 0 minimum et 20 maximum")
+            } else if (noteMin > noteMax) {
+                alert(`Le minimum ne peut pas dépasser le maximum !`)
+
                 // Si tout est OK alors :    
             } else {
                 // création du tableau de note des élèves.
                 let tab = randomArrayOfIntFromInterval(STUDENT_NUMBER, noteMin, noteMax);
-                // Affichage du tableau (enfin pas pour le moment car le prof à fait une bétise)
+                // Affichage du tableau (qui ne s'affiche pas)
+                console.log(tab)
                 displayArray(tab);
                 /*
                  * utilisation d'une boucle "for"  pour ranger les notes
@@ -138,10 +142,13 @@
                  * inclus dans la fonction
                 */
                 for (let i = 0; i < tab.length; i++) {
-                    if (tab[i] >= (noteMax / 2)) {
+                    if (tab[i] >= ((noteMax + noteMin) / 2)) {
                         organizedArray.push(tab[i])
                     }
+
+
                 }
+
                 // utilisation de fonction de la boite à outils pour afficher le resultat avec un petit message
                 displayOneResult(`Les élèves ayant obtenus une note supérieure à la moyenne sont aux nombres de`, organizedArray.length)
             }
