@@ -101,7 +101,7 @@
 
     <script type="text/javascript">
         // création d'une constante contenant le nombre d'élèves de la classe.
-        const studentNumber = 25;
+        const STUDENT_NUMBER = 25;
 
         /*
          * Fonction onclick qui va générer un tableau de note en chiffre entier,
@@ -129,7 +129,7 @@
                 // Si tout est OK alors :    
             } else {
                 // création du tableau de note des élèves.
-                let tab = randomArrayOfIntFromInterval(studentNumber, noteMin, noteMax);
+                let tab = randomArrayOfIntFromInterval(STUDENT_NUMBER, noteMin, noteMax);
                 // Affichage du tableau (enfin pas pour le moment car le prof à fait une bétise)
                 displayArray(tab);
                 /*
