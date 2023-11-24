@@ -90,7 +90,8 @@
             </button>
         </div>
     </div>
-
+    <div class="card result" id="result">
+    </div>
     <script type="text/javascript">
 
         function generateAndExtractMinMax() {
@@ -108,14 +109,15 @@
                 let minValue = tab[0];
                 let maxValue = tab[0];
                 console.log(tab[0])
-                for (let i = 1 ; i < tab.length; i++) {
+                for (let i = 1; i < tab.length; i++) {
                     if (tab[i] < minValue) {
                         minValue = tab[i]
                     } else if (tab[i] > maxValue) {
                         maxValue = tab[i]
                     }
                 }
-                
+                displayOneResult(`Les chiffres minimum et maximum sont :`, `${minValue} et ${maxValue}`)
+
             }
 
         }
