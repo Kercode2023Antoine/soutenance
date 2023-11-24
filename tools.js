@@ -1,3 +1,8 @@
+function displayCard (element) {
+    element.style.display = "block";
+    element.scrollIntoView();
+}
+
 /*
  * Affiche le contenu d'un tableau de type Array à la fin courante du document html.
  * Le résultat est présenté sous forme de table HTML dans d'un bloc de type "cartouche".
@@ -8,12 +13,14 @@
  */
 
 function displayArray (tab) {
-    let out = '<div class="card result">\n<table class="display">\n<tr>\n';
+    let element = document.getElementById ('result');
+    displayCard (element);
+    let out = '<table class="display">\n<tr>\n';
     tab.forEach ((item, index) => {
-        out += '<td>' + item + '</td>\n';
+        out += '<td class="border-blue">' + item + '</td>\n';
     });
-    out += '</tr>\n</table>\n</div>';
-    document.writeln (out);
+    out += '</tr>\n</table>\n';
+    element.innerHTML = out;
 }
 
 
@@ -27,11 +34,13 @@ function displayArray (tab) {
  * Retour :
  */
 
-function displayOneResult (message, result) {
-    let out = '<div class="card result">\n<table class="display">\n<tr>\n';
+function displayResult (message, result) {
+    let element = document.getElementById ('result');
+    displayCard (element);
+    let out = '<table class="display">\n<tr>\n<td>';
     out += (message + " " + result);
-    out += '</tr>\n</table>\n</div>';
-    document.writeln (out);
+    out += '</td></tr>\n</table>\n</div>';
+    element.innerHTML = out;
 }
 
 
@@ -64,3 +73,20 @@ function randomArrayOfIntFromInterval (n, min, max) { // min and max included
     return (tab);
 }
 
+/*
+ * Affiche un résultat à la fin courante du document html.
+ * Le résultat est présenté dans d'un bloc de type "cartouche" sous forme d'un élément "message"
+ * suivi d'un élément résultat. Par exemple : "Voici mon résultat : " + le résultat proprement dit.
+ * Paramètres:
+ *  - message : la chaine de caractères du message.
+ *  - result : le résultat à concaténer ; ce paramètre peut être une chaine ou un nombre.
+ * Retour :
+ */
+
+function displayOneResult (message, result) {
+    let element = document.getElementById ('result');
+    let out = '<div class="card result">\n<table class="display">\n<tr>\n';
+    out += (message + " " + result);
+    out += '</tr>\n</table>\n</div>';
+    element.innerHTML = out;
+}

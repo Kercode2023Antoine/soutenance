@@ -88,20 +88,21 @@
     <!-- html wrapper -->
     <div class="card input">
         <div class="formulaire">
-            <input type="number" id="note-min" placeholder="Note minimale possible">
-            <input type="number" id="note-max" placeholder="Note maximale possible">
+            <input type="text" id="note-min" placeholder="Note minimale possible">
+            <input type="text" id="note-max" placeholder="Note maximale possible">
             <button type="button" class="btn btn-primary" onclick="generateAndAnalyze()">
                 Générer les notes et analyser
             </button>
         </div>
+    </div>
+    <div class="card result" id="result">
     </div>
 
 
     <script type="text/javascript">
         // création d'une constante contenant le nombre d'élèves de la classe.
         const studentNumber = 25;
-        // création du tableau qui va récuperer les notes des élèvres a la génération
-        let tab = [];
+
         /*
          * Fonction onclick qui va générer un tableau de note en chiffre entier,
          * elle va aussi générer un nouveau tableau vide qui recevra les notes
@@ -119,22 +120,31 @@
             */
             let noteMin = parseInt(document.getElementById("note-min").value);
             let noteMax = parseInt(document.getElementById("note-max").value);
-            // remplissage du tableau vide créer à l'extérieur de la fonction.
-            tab = randomArrayOfIntFromInterval(studentNumber, noteMin, noteMax);
-            // Affichage du tableau (enfin pas pour le moment car le prof à fait une bétise)
-            displayArray(tab);
-            /*
-             * utilisation d'une boucle "for"  pour ranger les notes
-             * supérieur à la moyenne dans le nouveau tableau vide
-             * inclus dans la fonction
-            */
-            for (let i = 0; i < tab.length; i++) {
-                if (tab[i] >= (noteMax / 2)) {
-                    organizedArray.push(tab[i])
+            // Vérification que les notes saisies soient bien des nombres
+            if (isNaN(noteMin) || isNaN(noteMax)) {
+                alert("veuillez saisir des notes entre 0 minimum et 20 maximum")
+                // vérification que les notes saisies soient entre 0 et 20    
+            } else if (noteMin < 0 || noteMax > 20) {
+                alert("veuillez saisir des notes entre 0 minimum et 20 maximum")
+                // Si tout est OK alors :    
+            } else {
+                // création du tableau de note des élèves.
+                let tab = randomArrayOfIntFromInterval(studentNumber, noteMin, noteMax);
+                // Affichage du tableau (enfin pas pour le moment car le prof à fait une bétise)
+                displayArray(tab);
+                /*
+                 * utilisation d'une boucle "for"  pour ranger les notes
+                 * supérieures à la moyenne dans le nouveau tableau vide
+                 * inclus dans la fonction
+                */
+                for (let i = 0; i < tab.length; i++) {
+                    if (tab[i] >= (noteMax / 2)) {
+                        organizedArray.push(tab[i])
+                    }
                 }
+                // utilisation de fonction de la boite à outils pour afficher le resultat avec un petit message
+                displayOneResult(`Les élèves ayant obtenus une note supérieure à la moyenne sont aux nombres de`, organizedArray.length)
             }
-            // utilisation de fonction de la boite à outils pour afficher le resultat avec un petit message
-            displayOneResult(`Les élèves ayant obtenus une notes supérieur à la moyenne sont aux nombres de`, organizedArray.length)
         }
 
 
